@@ -33,6 +33,20 @@ Uma aplicação de interface de linha de comando (CLI) para gerenciamento de inv
     node index.js
    ```
 
+## 🧪 Como Rodar os Testes
+
+O projeto inclui testes unitários para validar a lógica de negócios. Devido ao uso de ES Modules, utilize o seguinte comando:
+
+**Linux / Mac / Git Bash:**
+```bash
+NODE_OPTIONS=--experimental-vm-modules npx jest
+```
+
+**Windows (PowerShell):**
+```powershell
+$env:NODE_OPTIONS="--experimental-vm-modules"; npx jest
+```
+
 ## 📂 Estrutura do Projeto
 
 - index.js: Ponto de entrada. Gerencia o Menu Principal e a interação com o usuário.
