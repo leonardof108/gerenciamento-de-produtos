@@ -9,6 +9,7 @@ Uma aplicação de interface de linha de comando (CLI) para gerenciamento de inv
 - **Busca Inteligente:** Pesquisa rápida por **ID** ou **Nome** (case-insensitive).
 - **Filtros e Ordenação:** Opções para filtrar por categoria e ordenar por nome, preço ou quantidade.
 - **Interface Interativa:** Menu navegável via setas desenvolvido com `Inquirer.js`.
+- **Testes unitários:** Testes realizados com Jest.
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -16,6 +17,7 @@ Uma aplicação de interface de linha de comando (CLI) para gerenciamento de inv
 - **JavaScript (ES6+)** (Lógica)
 - **Inquirer.js** (Interface de Terminal)
 - **FS (File System)** (Módulo nativo para persistência de dados)
+- **Jest** (Testes)
 
 ## 📦 Como Rodar o Projeto
 
@@ -38,11 +40,13 @@ Uma aplicação de interface de linha de comando (CLI) para gerenciamento de inv
 O projeto inclui testes unitários para validar a lógica de negócios. Devido ao uso de ES Modules, utilize o seguinte comando:
 
 **Linux / Mac / Git Bash:**
+
 ```bash
 NODE_OPTIONS=--experimental-vm-modules npx jest
 ```
 
 **Windows (PowerShell):**
+
 ```powershell
 $env:NODE_OPTIONS="--experimental-vm-modules"; npx jest
 ```
@@ -55,6 +59,8 @@ $env:NODE_OPTIONS="--experimental-vm-modules"; npx jest
 
 - produtos.json: Banco de dados local onde o inventário é armazenado.
 
+- service.test.js: Testes unitários.
+
 ## 📝 Decisões de Design
 
 - Separação de Responsabilidades: A lógica de interface (index.js) foi separada da lógica de dados (service.js) para manter o código limpo e organizado.
@@ -62,6 +68,8 @@ $env:NODE_OPTIONS="--experimental-vm-modules"; npx jest
 - Validação de Dados: Implementação de verificações para garantir que preços e quantidades sejam números válidos e campos obrigatórios não fiquem vazios.
 
 - Experiência do Usuário (UX): Utilização da biblioteca Inquirer.js para oferecer uma navegação fluida e intuitiva, superior ao uso básico do readline.
+
+- Testes unitários: Testes foram implementados para verificar se `addProduct` e `loadProduct` funcionam corretamente sem rodar o CLI.
 
 ---
 
