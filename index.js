@@ -35,7 +35,7 @@ async function mainMenu() {
 
     switch (answer.action) {
       case "1. Listar todos os produtos":
-        displayProducts(products);
+        await handleListProducts();
         await waitKeyPress();
         break;
 
@@ -75,6 +75,57 @@ function displayProducts(list) {
   } else {
     console.table(list);
   }
+}
+
+async function handleListProducts() {
+  const { viewMode } = await inquirer.prompt([
+    {
+      type: "list",
+      name: "viewMode",
+      message: "Como você gostaria de ver o inventário?",
+      choices: [
+        "Listar tudo (Padrão)",
+        "Filtrar por categoria",
+        "Filtrar por preço (Ascendente)",
+        "Filrar por preço (Descendente)",
+        "Filtrar por quantidade (Ascendente)",
+        "Filtrar por quantidade (Descendente)",
+      ],
+    },
+  ]);
+
+  let result = [...products]; // cria uma cópia para não afetar o original
+
+  if (viewMode === "Filtrar por categoria") {
+    const { category } = await inquirer.prompt([
+      {
+        type: "list",
+        name: "category",
+        message: "Selecione a categoria:",
+        choices: [
+          "Eletrônicos",
+          "Periféricos",
+          "Acessórios",
+          "Escritório",
+          "Outros",
+        ],
+      },
+    ]);
+    result = result.filter((p) => p.category === category);
+  } else if (viewMode.includes("Filtrar por preço")) {
+    result.sort((a, b) =>
+      viewMode.includes("Ascendente") ? a.price - b.price : b.price - a.price
+    );
+  } else if (viewMode.includes("Sort by Quantity")) {
+    result.sort((a, b) =>
+      viewMode.includes("Ascendente")
+        ? a.quantity - b.quantity
+        : b.quantity - a.quantity
+    );
+  }
+
+  console.log(`\n📋 Mostrando ${result.length} itens:\n`);
+  displayProducts(result);
 }
 
 async function waitKeyPress() {
