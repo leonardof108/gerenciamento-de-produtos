@@ -173,7 +173,10 @@ async function handleAddProduct() {
   ]);
 
   // lógica importada do service.js
-  addProduct(products, answers);
+  const newProduct = addProduct(products, answers);
+  console.log(
+    `\n✅ Produto "${newProduct.name}" adicionado com sucesso com o ID ${newProduct.id}!`
+  );
 }
 
 async function handleUpdateProduct() {

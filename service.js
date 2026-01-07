@@ -43,8 +43,5 @@ export const addProduct = (products, productData) => {
 
   products.push(newProduct);
   saveProducts(products); // salva automaticamente
-  console.log(
-    `\n✅ Produto "${newProduct.name}" adicionado com sucesso com o ID ${newId}!`
-  );
-  return products;
+  return newProduct;
 };
