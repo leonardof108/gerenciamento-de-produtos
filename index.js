@@ -85,6 +85,7 @@ async function handleListProducts() {
       message: "Como você gostaria de ver o inventário?",
       choices: [
         "Listar tudo (Padrão)",
+        "Ordenar por nome",
         "Filtrar por categoria",
         "Filtrar por preço (Ascendente)",
         "Filtrar por preço (Descendente)",
@@ -112,6 +113,8 @@ async function handleListProducts() {
       },
     ]);
     result = result.filter((p) => p.category === category);
+  } else if (viewMode === "Ordenar por nome") {
+    result.sort((a, b) => a.name.localeCompare(b.name));
   } else if (viewMode.includes("Filtrar por preço")) {
     result.sort((a, b) =>
       viewMode.includes("Ascendente") ? a.price - b.price : b.price - a.price
