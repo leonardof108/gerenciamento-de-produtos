@@ -87,7 +87,7 @@ async function handleListProducts() {
         "Listar tudo (Padrão)",
         "Filtrar por categoria",
         "Filtrar por preço (Ascendente)",
-        "Filrar por preço (Descendente)",
+        "Filtrar por preço (Descendente)",
         "Filtrar por quantidade (Ascendente)",
         "Filtrar por quantidade (Descendente)",
       ],
@@ -116,7 +116,7 @@ async function handleListProducts() {
     result.sort((a, b) =>
       viewMode.includes("Ascendente") ? a.price - b.price : b.price - a.price
     );
-  } else if (viewMode.includes("Sort by Quantity")) {
+  } else if (viewMode.includes("Filtrar por quantidade")) {
     result.sort((a, b) =>
       viewMode.includes("Ascendente")
         ? a.quantity - b.quantity
@@ -216,8 +216,20 @@ async function handleUpdateProduct() {
       type: "input",
       name: "quantity",
       message: `Quantidade (${current.quantity}):`,
+      validate: (input) => {
+        if (input.trim() === "") return true;
+        return !isNaN(input) ? true : "Deve ser um número";
+      },
     },
-    { type: "input", name: "price", message: `Preço (${current.price}):` },
+    {
+      type: "input",
+      name: "price",
+      message: `Preço (${current.price}):`,
+      validate: (input) => {
+        if (input.trim() === "") return true;
+        return !isNaN(input) ? true : "Deve ser um número";
+      },
+    },
   ]);
 
   // logica de atualização
